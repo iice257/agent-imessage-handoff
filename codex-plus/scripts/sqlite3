@@ -1,0 +1,2 @@
+#!/usr/bin/env node
+import "./sqlite3-shim.mjs";

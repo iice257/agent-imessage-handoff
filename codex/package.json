@@ -1,0 +1,27 @@
+{
+  "name": "@gaberagland/imessage-handoff",
+  "version": "0.1.0",
+  "description": "Install the iMessage Handoff Codex skill for continuing Codex threads from iMessage.",
+  "type": "module",
+  "bin": {
+    "handoff": "./bin/handoff.mjs",
+    "imessage-handoff": "./bin/imessage-handoff.mjs"
+  },
+  "files": [
+    "bin/",
+    "imessage-handoff/",
+    "src/",
+    "docs/",
+    "examples/",
+    "templates/"
+  ],
+  "packageManager": "pnpm@10.26.0",
+  "scripts": {
+    "build": "pnpm --filter @gaberagland/imessage-handoff-relay build",
+    "test": "node scripts/run-tests.mjs",
+    "typecheck": "pnpm --filter @gaberagland/imessage-handoff-relay typecheck"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

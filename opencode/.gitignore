@@ -1,0 +1,4 @@
+.state/
+node_modules/
+.webhook-secret.local.txt
+*.log

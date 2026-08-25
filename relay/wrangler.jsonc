@@ -1,0 +1,61 @@
+﻿{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "imessage-handoff",
+  "main": "./src/worker.ts",
+  "compatibility_date": "2026-03-17",
+  "compatibility_flags": [
+    "nodejs_compat",
+    "nodejs_compat_populate_process_env"
+  ],
+  // D1 stores routing and pairing metadata only. Message bodies and media URLs
+  // should stay out of D1 so conversation content is not persisted by the relay.
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "imessage-handoff",
+      "database_id": "b1cbb35a-bc43-4550-bd62-d45260309493",
+      "migrations_dir": "./src/db/migrations"
+    }
+  ],
+  // One global Durable Object holds pending inbound messages in memory and
+  // pushes them to connected Codex clients over WebSocket.
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "HANDOFF_SOCKET",
+        "class_name": "HandoffSocket"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": ["HandoffSocket"]
+    }
+  ],
+  // Keep Cloudflare-side log persistence disabled for this app. This supports
+  // the product promise that relay logs should not retain user message details.
+  "logpush": false,
+  "tail_consumers": [],
+  "streaming_tail_consumers": [],
+  "observability": {
+    "enabled": false,
+    "logs": {
+      "enabled": false,
+      "invocation_logs": false,
+      "persist": false,
+      "destinations": []
+    },
+    "traces": {
+      "enabled": false,
+      "persist": false,
+      "destinations": []
+    }
+  },
+  "vars": {
+    "SENDBLUE_FROM_NUMBER": "+13054507715",
+    "SENDBLUE_API_BASE_URL": "https://api.sendblue.com/api",
+    "SENDBLUE_TYPING_DELAY_MS": "2000"
+  }
+}
+
