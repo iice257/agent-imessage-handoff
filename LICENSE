@@ -1,3 +1,9 @@
+Note: the original Codex skill and relay in this repo come from
+gragland/codex-imessage-handoff (https://github.com/gragland/codex-imessage-handoff)
+and remain under their original terms. The license below covers the
+additions in this repo (the reliability layer, relay migration fixes and the
+opencode port).
+
 MIT License
 
 Copyright (c) 2026 Kingsley Aremu

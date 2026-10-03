@@ -1,6 +1,22 @@
-# Agent iMessage Handoff
+# Agent iMessage Handoff — text your coding agent
 
-One repo for running coding agents over iMessage, across every harness. Point your agent at this repo to set things up; for a new harness, fork the repo and add a folder.
+Walk away from your desk. Your agent keeps working and texts you when it needs you. Reply from your phone and it carries on.
+
+![Codex handing a session off to iMessage](codex-plus/images/codex-preview.png)
+
+One self-hosted relay on Cloudflare's free tier, with bridges for Codex, Codex-plus and opencode. Message content is never persisted.
+
+```mermaid
+flowchart LR
+  A[Codex / opencode] -- status --> R[Cloudflare Worker relay<br/>D1 + Durable Object]
+  R -- iMessage --> P[Your phone]
+  P -- reply --> S[Sendblue webhook] --> R
+  R -- WebSocket --> A
+```
+
+TypeScript · Cloudflare Workers · D1 · Durable Objects · Sendblue
+
+---
 
 ## Layout
 
